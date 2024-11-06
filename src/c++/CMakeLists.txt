@@ -55,14 +55,14 @@ include(FetchContent)
 
 FetchContent_Declare(
   repo-common
-  GIT_REPOSITORY https://github.com/triton-inference-server/common.git
+  GIT_REPOSITORY https://gitee.com/mostevercxz/common.git
   GIT_TAG ${TRITON_COMMON_REPO_TAG}
   GIT_SHALLOW ON
 )
 
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/9406a60c7839052e4944ea4dbc8344762a89f9bd.zip
+  URL http://10.10.130.170:9090/pkgs/9406a60c7839052e4944ea4dbc8344762a89f9bd.zip
 )
 
 if(TRITON_ENABLE_CC_GRPC OR TRITON_ENABLE_PERF_ANALYZER)
@@ -72,7 +72,7 @@ if(TRITON_ENABLE_CC_GRPC OR TRITON_ENABLE_PERF_ANALYZER)
   if(TRITON_ENABLE_PERF_ANALYZER)
     FetchContent_Declare(
       repo-core
-      GIT_REPOSITORY https://github.com/triton-inference-server/core.git
+      GIT_REPOSITORY https://gitee.com/mostevercxz/core.git
       GIT_TAG ${TRITON_CORE_REPO_TAG}
       GIT_SHALLOW ON
     )

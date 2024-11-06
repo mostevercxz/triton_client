@@ -52,8 +52,10 @@ set(TRITON_THIRD_PARTY_REPO_TAG "main" CACHE STRING "Tag for triton-inference-se
 set(TRITON_CORE_REPO_TAG "main" CACHE STRING "Tag for triton-inference-server/core repo")
 
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
+  #set(CMAKE_BUILD_TYPE Release)
+  set(CMAKE_BUILD_TYPE Debug)
 endif()
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(NOT TRITON_ENABLE_PYTHON_GRPC)
   set(TRITON_COMMON_ENABLE_PROTOBUF_PYTHON OFF)
@@ -66,9 +68,7 @@ include(FetchContent)
 
 FetchContent_Declare(
   repo-third-party
-  GIT_REPOSITORY https://github.com/triton-inference-server/third_party.git
-  GIT_TAG ${TRITON_THIRD_PARTY_REPO_TAG}
-  GIT_SHALLOW ON
+  SOURCE_DIR /home/giant/github/triton/third_party
 )
 set(TRITON_THIRD_PARTY_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third-party)
 FetchContent_MakeAvailable(repo-third-party)
@@ -168,6 +168,7 @@ if(TRITON_ENABLE_CC_HTTP OR TRITON_ENABLE_CC_GRPC OR TRITON_ENABLE_PERF_ANALYZER
       -DTRITON_ENABLE_GPU:BOOL=${TRITON_ENABLE_GPU}
       -DTRITON_ENABLE_ZLIB:BOOL=${TRITON_ENABLE_ZLIB}
       -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+      -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
       -DCMAKE_INSTALL_PREFIX:PATH=${TRITON_INSTALL_PREFIX}
     DEPENDS ${_cc_client_depends}
   )
